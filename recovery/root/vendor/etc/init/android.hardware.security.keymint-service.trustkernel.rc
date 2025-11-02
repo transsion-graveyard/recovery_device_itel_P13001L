@@ -1,0 +1,6 @@
+service vendor.keymint-trustkernel /vendor/bin/hw/android.hardware.security.keymint-service.trustkernel
+    interface aidl android.hardware.security.keymint.IKeyMintDevice/default
+    class early_hal
+    user system
+    group system
+    seclabel u:r:recovery:s0

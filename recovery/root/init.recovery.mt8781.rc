@@ -1,0 +1,52 @@
+import /mtk-plpath-utils.rc
+import /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
+import /vendor/etc/init/android.hardware.security.keymint-service.trustkernel.rc
+import /vendor/etc/init/trustkernel.rc
+
+on init
+    export LD_LIBRARY_PATH /system/lib64:/system/lib64/hw:/vendor/lib64:/vendor/lib64/hw
+
+on fs
+    wait /dev/block/platform/soc/11270000.ufshci
+    symlink /dev/block/platform/soc/11270000.ufshci /dev/block/bootdevice
+    mkdir /mnt/vendor 0755 system system
+    mkdir /mnt/vendor/nvdata 0771 system system
+    mkdir /mnt/vendor/nvcfg 0771 system system
+    mkdir /mnt/vendor/persist 0755 system system
+    mkdir /mnt/vendor/persist/t6 0755 system system
+    mkdir /mnt/vendor/persist/t6_twrp 0755 system system
+    mkdir /mnt/vendor/protect_f 0770 system system
+    mkdir /mnt/vendor/protect_f/tee 0755 system system
+    mkdir /mnt/vendor/protect_f/tee_twrp 0755 system system
+    mkdir /mnt/vendor/protect_s 0770 system system
+    mount ext4 /dev/block/bootdevice/by-name/protect1 /mnt/vendor/protect_f rw wait
+    mount ext4 /dev/block/bootdevice/by-name/protect2 /mnt/vendor/protect_s rw wait
+    mount ext4 /dev/block/bootdevice/by-name/nvdata /mnt/vendor/nvdata rw wait
+    mount ext4 /dev/block/bootdevice/by-name/nvcfg /mnt/vendor/nvcfg rw wait
+    mount ext4 /dev/block/bootdevice/by-name/persist /mnt/vendor/persist rw wait
+    exec u:r:recovery:s0 system -- /vendor/bin/trustkernel.twrp.sh
+    install_keyring
+    setprop crypto.ready 1
+
+on property:crypto.ready=1
+    start vendor.keymint-trustkernel
+    start vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unsupported
+    stop teed
+    stop vendor.keymint-trustkernel
+    stop vendor.gatekeeper-1-0
+
+on property:ro.crypto.state=unencrypted
+    stop teed
+    stop vendor.keymint-trustkernel
+    stop vendor.gatekeeper-1-0
+
+on property:twrp.decrypt.done=true
+    stop teed
+    stop vendor.keymint-trustkernel
+    stop vendor.gatekeeper-1-0
+
+on boot
+    start boot-hal-1-2
+    start health-hal-2-1
