@@ -1,5 +1,7 @@
 name: OrangeFox
 
+# Workflow visibility refresh for GitHub Actions indexing.
+
 # Credits to:
 # https://github.com/TeamWin
 # https://gitlab.com/OrangeFox
