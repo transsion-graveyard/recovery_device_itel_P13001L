@@ -185,3 +185,5 @@
 /lib/modules/mac80211.ko: /lib/modules/cfg80211.ko
 /lib/modules/mtk_mdpm.ko:
 /lib/modules/cust_gpios.ko:
+/lib/modules/flashlight.ko:
+/lib/modules/flashlights-cp2155.ko: /lib/modules/flashlight.ko

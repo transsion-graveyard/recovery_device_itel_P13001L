@@ -127,6 +127,8 @@ tcpc_class.ko
 aw35615_whole.ko
 ocp96011-i2c.ko
 mtk_chg_type_det.ko
+flashlight.ko
+flashlights-cp2155.ko
 mtk_pd_adapter.ko
 mtk_pep40.ko
 mtk_pd_charging.ko

@@ -1037,3 +1037,7 @@ alias of:N*T*Cmediatek,mt6789-mdpm mtk_mdpm
 alias of:N*T*Cmediatek,mt6789-mdpmC* mtk_mdpm
 alias of:N*T*Ccust,cust_gpios cust_gpios
 alias of:N*T*Ccust,cust_gpiosC* cust_gpios
+alias of:N*T*Cmediatek,flashlight_core flashlight
+alias of:N*T*Cmediatek,flashlight_coreC* flashlight
+alias of:N*T*Cmediatek,flashlights_cp2155 flashlights_cp2155
+alias of:N*T*Cmediatek,flashlights_cp2155C* flashlights_cp2155
