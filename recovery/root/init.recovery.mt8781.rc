@@ -1,3 +1,7 @@
+import /vendor/etc/init/android.hardware.gatekeeper@1.0-service.rc
+import /vendor/etc/init/android.hardware.security.keymint-service.trustkernel.rc
+import /vendor/etc/init/trustkernel.rc
+
 on init
     export LD_LIBRARY_PATH /system/lib64:/system/lib64/hw:/vendor/lib64:/vendor/lib64/hw
 
