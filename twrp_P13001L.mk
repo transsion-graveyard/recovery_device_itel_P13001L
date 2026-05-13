@@ -4,7 +4,7 @@ $(call inherit-product, device/itel/P13001L/device.mk)
 PRODUCT_BRAND := Itel
 PRODUCT_DEVICE := P13001L
 PRODUCT_MANUFACTURER := ITEL
-PRODUCT_MODEL := itel VistaTab 30 Pro
+PRODUCT_MODEL := itel P13001L
 PRODUCT_NAME := twrp_P13001L
 
 PRODUCT_GMS_CLIENTID_BASE := android-itel
