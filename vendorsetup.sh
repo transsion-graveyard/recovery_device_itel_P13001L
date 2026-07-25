@@ -51,30 +51,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
     export OF_FL_PATH1="/dev/flashlight"
 	export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
 	export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
-	device_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-	workspace_root="$(cd "${device_dir}/../../.." && pwd)"
-	patch_files=(
-		"${device_dir}/patches/0001-Support-direct-file-flashlight-paths.patch"
-		"${device_dir}/patches/0002-Support-MTK-flashlight-ioctl-control.patch"
-	)
-	if command -v patch >/dev/null 2>&1; then
-		for patch_file in "${patch_files[@]}"; do
-			if [ ! -f "${patch_file}" ]; then
-				echo "[P13001L] Missing patch: ${patch_file}"
-			elif (
-				cd "${workspace_root}" &&
-				patch -p1 -N --dry-run --silent < "${patch_file}" >/dev/null 2>&1
-			); then
-				(
-					cd "${workspace_root}" &&
-					patch -p1 -N --silent < "${patch_file}" >/dev/null 2>&1
-				) && echo "[P13001L] Applied patch: $(basename "${patch_file}")"
-			else
-				echo "[P13001L] Patch already applied or not applicable: $(basename "${patch_file}")"
-			fi
-		done
-	fi
-	unset device_dir workspace_root patch_files patch_file
+
         [ "$FOX_BUILD_TYPE" = "Stable" ] && export OF_ADVANCED_SECURITY=1;
 else
 	if [ -z "$FOX_BUILD_DEVICE" -a -z "$BASH_SOURCE" ]; then
